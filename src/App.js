@@ -1,9 +1,10 @@
 // import './App.css';
 import PageContent from './PageContent';
-import NavBar from './NavBar';
+import NavBar from './NavBarHOC';
 import LoginForm from './LoginForm';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+
 
 function App () {
 	return (

@@ -9,6 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import styles from './styles/NavBarStyles';
 import { withStyles } from '@material-ui/core/styles';
 import { ThemeContext } from './contexts/ThemeContext';
+import { LanguageContext } from './contexts/LanguageContext';
 
 class AppNavBar extends Component {
 	static contextType = ThemeContext;
@@ -22,51 +23,55 @@ class AppNavBar extends Component {
 		let { classes } = this.props;
 		let { search } = this.state;
 		return (
-			<AppBar
-				position="static"
-				className={classes.navBar}
-				color={
+			<LanguageContext.Consumer>
+				{(value) => (
+					<AppBar
+						position="static"
+						className={classes.navBar}
+						color={
 
-						isDarkMode ? 'primary' :
-						'default'
-				}
-			>
-				<Toolbar className={classes.toolbar}>
-					<IconButton color="inherit" aria-label="Flag">
-						<span>🇫🇷</span>
-					</IconButton>
-					<Typography
-						className={classes.title}
-						variant="h6"
-						color="inherit"
-						noWrap
+								isDarkMode ? 'primary' :
+								'default'
+						}
 					>
-						Tralala
-					</Typography>
-					<div className={classes.switchContent}>
-						<Typography>N/D mode</Typography>
-						<Switch onChange={toggleTheme} />
-					</div>
-					<div className={classes.search}>
-						<SearchIcon className={classes.searchIcon} />
-						<form>
-							<InputBase
-								// fullWidth
-								classes={{
-									root  : classes.inputRoot,
-									input : classes.inputInput
-								}}
-								// autoFocus
-								placeholder="Search..."
-								type="text"
-								// name="userName"
-								value={search}
-								onChange={this.handleChange}
-							/>
-						</form>
-					</div>
-				</Toolbar>
-			</AppBar>
+						<Toolbar className={classes.toolbar}>
+							<IconButton color="inherit" aria-label="Flag">
+								<span>🇫🇷</span>
+							</IconButton>
+							<Typography
+								className={classes.title}
+								variant="h6"
+								color="inherit"
+								noWrap
+							>
+								Tralala {value.language}
+							</Typography>
+							<div className={classes.switchContent}>
+								<Typography>N/D mode</Typography>
+								<Switch onChange={toggleTheme} />
+							</div>
+							<div className={classes.search}>
+								<SearchIcon className={classes.searchIcon} />
+								<form>
+									<InputBase
+										// fullWidth
+										classes={{
+											root  : classes.inputRoot,
+											input : classes.inputInput
+										}}
+										// autoFocus
+										placeholder="Search..."
+										type="text"
+										// name="userName"
+										value={search}
+										onChange={this.handleChange}
+									/>
+								</form>
+							</div>
+						</Toolbar>
+					</AppBar>
+				)}
+			</LanguageContext.Consumer>
 		);
 	}
 }
